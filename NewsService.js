@@ -45,7 +45,7 @@ function createNewsStory(title, story){
 			for(var news in newsCollection){
 				for(var num in newsCollection[news]["ARTICLE"]){
 					if(newsCollection.NEWS.ARTICLE[num].TITLE != title && story == null){	
-						//Push to json object
+						//Push to json object and add article
 						newsCollection.NEWS.ARTICLE.push({
 							TITLE: title,
 							AUTHOR: "Default Author",
@@ -69,7 +69,7 @@ function createNewsStory(title, story){
 						var newDate = story.DATE;
 						var newPublic = story.PUBLIC;
 						var newContent = story.CONTENT;
-						//Push to json object
+						//Push to json object and add article
 						newsCollection.NEWS.ARTICLE.push({
 							TITLE: newTitle,
 							AUTHOR: newAuthor,
@@ -98,7 +98,6 @@ function createNewsStory(title, story){
 
 //Update headlines of existing news storys
 function updateHeadline(title){
-	
 	//Read file
 	fs.readFile('./news.xml', 'utf-8', function(err, xmlDoc){
 		if(err){ console.log("Failed to load XML."); }
@@ -132,7 +131,6 @@ function updateHeadline(title){
 
 //Change content of existing storys
 function changeContent(title){
-	
 	//Read file
 	fs.readFile('./news.xml', 'utf-8', function(err, xmlDoc){
 		if(err){ console.log("Failed to load XML."); }
@@ -166,28 +164,26 @@ function changeContent(title){
 
 //Delete existing story
 function deleteNewsStory(title){
-	
 	//Read file
 	fs.readFile('./news.xml', 'utf-8', function(err, xmlDoc){
 		if(err){ console.log("Failed to load XML."); }
-		
+		//Parse xml file
 		parseString(xmlDoc, function(err, result){
 			if(err) { console.log("Failed to parse xml."); }
-			
+			//Store parsed xml into json obj called newsCollection
 			newsCollection = result;
-		
+			//Iterate through newsCollection and delete article
 			for(var news in newsCollection){
 				for(var num in newsCollection[news]["ARTICLE"]){
 					if(newsCollection.NEWS.ARTICLE[num].TITLE == title){
-						
+						//Delete article
 						delete newsCollection.NEWS.ARTICLE[num];
-						
+						//Build xml
 						xmlBuilder = new xml2js.Builder();
 						xml = xmlBuilder.buildObject(newsCollection);
-						
+						//Write file
 						fs.writeFile('./news.xml', xml, function(err, xmlDoc){
 							if(err){ console.log("Failed to write xml."); }
-							
 							console.log("Successfully deleted news story.");
 						});
 						
@@ -198,16 +194,41 @@ function deleteNewsStory(title){
 		});
 	});
 }
-/*
+
 //Return a collection of news story obj based on filter
 function filteredCollection(subString, dataRange, author){
-	
+	//Read file
+	fs.readFile('./news.xml', 'utf-8', function(err, xmlDoc){
+		if(err){ console.log("Failed to load XML."); }
+		//Parse xml file
+		parseString(xmlDoc, function(err, result){
+			if(err) { console.log("Failed to parse xml."); }
+			//Store parsed xml into json obj called filteredCollection
+			var filteredCollection = result;
+			//Iterate through filteredCollection and store filtered content
+			for(var news in filteredCollection){
+				for(var num in filteredCollection[news]["ARTICLE"]){
+					if(filteredCollection.NEWS.ARTICLE[num].AUTHOR != author){
+						delete filteredCollection.NEWS.ARTICLE[num];
+					}
+				}
+				//Build xml
+				xmlBuilder = new xml2js.Builder();
+				xml = xmlBuilder.buildObject(filteredCollection);
+				//Write new filtered file
+				fs.writeFile('./filteredNews.xml', xml, function(err, xmlDoc){
+					if(err){ console.log("Failed to write xml."); }
+					console.log("Successfully filtered news story.");
+				});
+			}
+		});
+	});
 }
-*/
+
 
 //console.log(createNewsStory("New news story.", null));
 //console.log(deleteNewsStory("Mark Mulder ends 2015 comeback bid"));
 //console.log(updateHeadline("Angels sign Stewart, Herrmann to minor-league deals"));
 //console.log(changeContent("Angels, Garrett Richards settle on $3.2 million for 2015"));
-console.log(printCollection());
+//console.log(printCollection());
 //console.log(filteredCollection(null, null, "Igor"));
