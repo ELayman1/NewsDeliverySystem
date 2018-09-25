@@ -23,7 +23,6 @@ function printCollection(){
 				for(var num in newsCollection[news]["ARTICLE"]){
 					console.log("Article: " + (counter));
 					console.log(newsCollection.NEWS.ARTICLE[num]);
-					console.log(newsCollection.NEWS);
 					console.log();
 					counter++;
 				}
@@ -210,5 +209,5 @@ function filteredCollection(subString, dataRange, author){
 //console.log(deleteNewsStory("Mark Mulder ends 2015 comeback bid"));
 //console.log(updateHeadline("Angels sign Stewart, Herrmann to minor-league deals"));
 //console.log(changeContent("Angels, Garrett Richards settle on $3.2 million for 2015"));
-//console.log(printCollection());
+console.log(printCollection());
 //console.log(filteredCollection(null, null, "Igor"));
