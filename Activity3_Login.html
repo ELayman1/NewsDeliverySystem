@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+	<script src="activity3.js"></script>
+
+	<!--Login style-->
+	<style>
+		form {
+			border: 3px solid #f1f1f1;
+		}
+		loginCntnr {
+			text-align: center;
+			display: inline-block;
+		}
+	</style>
+	
+	<h2>News Delivery Login</h2>
+	
+	<body>
+	
+		<!--Login form-->
+		<form id="form" method="POST">
+
+			<div class="loginCntnr" align="center">
+				<br><br><br>
+				<!--Username text field-->
+				<label id="ulabel"><b>Username:</b></label>
+				<input type="text" placeholder="Enter Username" id="uname" required><br><br>
+
+				<!--Password text field-->
+				<label id="uPswd"><b>Password:</b></label>
+				<input type="password" placeholder="Enter Password" id="pswd" required><br>
+				
+				<!--Remember me checkbox-->
+				<input type="checkbox" checked="checked" name="remember"> Remember me<br><br>
+				
+				<!--Login form-->
+				<input type="radio" name="guest" value="guest" checked> Guest<br>
+				<input type="radio" name="subscriber" value="subscriber"> Subscriber<br>
+				<input type="radio" name="author" value="author"> Author<br><br>
+				
+				<!--Login button-->
+				<button type="button" id="login" onclick="validate()">Login</button><br><br><br>
+			</div>
+		
+		</form>
+		
+	</body>
+</html>

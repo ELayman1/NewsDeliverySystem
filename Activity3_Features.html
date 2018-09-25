@@ -1,0 +1,35 @@
+<!--Table displays nothing... if you move above header u can see the space it creates to generate nothing.-->
+<!DOCTYPE html>
+<html>
+
+	<script src="activity3.js"></script>
+
+	<!--Table style-->
+	<style>
+		table,th,td {
+		border: 1px solid black;
+		border-collapse: collapse;
+		}
+		th,td {
+		padding: 5px;
+		}
+	</style>
+	
+	<body>
+	
+		<!--Logout-->
+		<div class="logout" align="right">
+			<!--Welcome message-->
+			<p>Welcome, &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+			<!--Logout button-->
+			<button type="button" id="submit" onclick="logout()">Logout</button>
+			</p>
+		</div>
+		
+		<!--Header-->
+		<h2>View News</h2>
+		<!--Table-->
+		<table id="newsStories"></table>
+		
+	</body>
+</html> 
